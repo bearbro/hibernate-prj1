@@ -23,6 +23,7 @@ public class UserAction extends ActionSupport
     private HttpServletResponse response;
     private HttpSession session;
     private ServletContext application;
+
     @Override
     public void setServletResponse(HttpServletResponse response) {
         this.response = response;
@@ -38,6 +39,7 @@ public class UserAction extends ActionSupport
         this.request = request;
 //        session=request.getSession();
     }
+
     public Customer getLoginUser() {
         return loginUser;
     }
@@ -48,13 +50,8 @@ public class UserAction extends ActionSupport
 
     public String register() {
         UserService userServ = new UserService();
-
-        if (userServ.register(loginUser)) {
-            session.setAttribute("user", loginUser.getAccount());
-            return "regsuccess";
-        } else {
-            return "regfail";
-        }
+        userServ.register(loginUser);
+        return "regsuccess";
 
     }
 

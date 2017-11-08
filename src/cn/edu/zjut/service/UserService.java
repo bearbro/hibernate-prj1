@@ -21,11 +21,9 @@ public class UserService {
             return true;
     }
 
-    public boolean register(Customer regUser) {
-        if ((!regUser.getAccount().equals(""))
-                && regUser.getAccount().equals(regUser.getPassword())) {
-            return true;
-        }
-        return false;
+    public void register(Customer regUser) {
+        CustomerDAO dao=new CustomerDAO();
+        dao.save(regUser);
+
     }
 }

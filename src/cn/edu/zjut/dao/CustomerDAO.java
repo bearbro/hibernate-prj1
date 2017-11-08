@@ -1,5 +1,6 @@
 package cn.edu.zjut.dao;
 
+import cn.edu.zjut.po.Customer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
@@ -8,6 +9,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -26,6 +28,22 @@ public class CustomerDAO {
             log.error("find by hql failed", re);
             throw re;
         } finally {
+            session.close();
+        }
+    }
+    @Transactional
+    public void save(Customer customer){
+        log.debug("saving customer instance");
+        SessionFactory sf=new Configuration().configure().buildSessionFactory();
+        Session session = sf.openSession();
+        try{
+            session.save(customer);
+            session.flush();
+            log.debug("save successdul");
+        }catch (RuntimeException re){
+            log.error("save failed",re);
+            throw re;
+        }finally {
             session.close();
         }
     }
