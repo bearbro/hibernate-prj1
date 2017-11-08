@@ -1,28 +1,33 @@
 package cn.edu.zjut.po;
 
-import java.util.Arrays;
-
 public class Item {
-    private String itemID;
-    private String title;
+    private ItemPK iPK;
     private String description;
     private Double cost;
     private byte[] image;
 
     public String getItemID() {
-        return itemID;
+        return iPK.getItemID();
     }
 
     public void setItemID(String itemID) {
-        this.itemID = itemID;
+        iPK.setItemID(itemID);
+    }
+
+    public ItemPK getiPK() {
+        return iPK;
+    }
+
+    public void setiPK(ItemPK iPK) {
+        this.iPK = iPK;
     }
 
     public String getTitle() {
-        return title;
+        return iPK.getTitle();
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        iPK.setTitle(title);
     }
 
     public String getDescription() {
@@ -49,29 +54,4 @@ public class Item {
         this.image = image;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Item item = (Item) o;
-
-        if (itemID != null ? !itemID.equals(item.itemID) : item.itemID != null) return false;
-        if (title != null ? !title.equals(item.title) : item.title != null) return false;
-        if (description != null ? !description.equals(item.description) : item.description != null) return false;
-        if (cost != null ? !cost.equals(item.cost) : item.cost != null) return false;
-        if (!Arrays.equals(image, item.image)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = itemID != null ? itemID.hashCode() : 0;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (cost != null ? cost.hashCode() : 0);
-        result = 31 * result + Arrays.hashCode(image);
-        return result;
-    }
 }

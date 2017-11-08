@@ -5,12 +5,11 @@
 <hibernate-mapping>
 
     <class name="cn.edu.zjut.po.Item" table="item" schema="hibernatedb">
-        <id name="itemID">
-            <column name="ISBN" sql-type="varchar(20)" length="20"/>
-        </id>
-        <property name="title">
-            <column name="title" sql-type="varchar(30)" length="30" not-null="true"/>
-        </property>
+        <composite-id name="iPK" class="cn.edu.zjut.po.ItemPK">
+            <key-property name="itemID" column="ISBN"/>
+            <key-property name="title" column="title"/>
+        </composite-id>
+
         <property name="description">
             <column name="description" sql-type="varchar(200)" length="200" not-null="true"/>
         </property>
