@@ -5,11 +5,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 
-import javax.transaction.Transactional;
+
 import java.util.List;
 
 
@@ -18,7 +19,7 @@ public class CustomerDAO {
 
     public List findByHql(String hql) {
         log.debug("finding LoginUser instance by hql");
-        SessionFactory sf = new Configuration().configure().buildSessionFactory();
+        SessionFactory sf = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
         Session session = sf.openSession();
         try {
             String queryString = hql;
@@ -31,14 +32,15 @@ public class CustomerDAO {
             session.close();
         }
     }
-    @Transactional
     public void save(Customer customer){
         log.debug("saving customer instance");
         SessionFactory sf=new Configuration().configure().buildSessionFactory();
         Session session = sf.openSession();
         try{
+            Transaction ts=session.beginTransaction();
             session.save(customer);
             session.flush();
+            ts.commit();
             log.debug("save successdul");
         }catch (RuntimeException re){
             log.error("save failed",re);
