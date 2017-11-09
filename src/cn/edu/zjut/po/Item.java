@@ -1,10 +1,12 @@
 package cn.edu.zjut.po;
 
+import java.sql.Blob;
+
 public class Item {
     private ItemPK iPK;
     private String description;
     private Double cost;
-    private byte[] image;
+    private Blob image;
 
     public String getItemID() {
         return iPK.getItemID();
@@ -46,11 +48,11 @@ public class Item {
         this.cost = cost;
     }
 
-    public byte[] getImage() {
+    public Blob getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(Blob image) {
         this.image = image;
     }
 
