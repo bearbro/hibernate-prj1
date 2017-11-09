@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="cn.edu.zjut.po.ItemDetail" table="item" catalog="hibernatedb">
-        <id name="itemID" type="java.lang.String">   <!--type="java.lang.String"-->
+        <id name="itemID" type="string">   <!--type="java.lang.String"-->
             <column name="ISBN" length="20"/>
             <generator class="assigned"/>
         </id>
